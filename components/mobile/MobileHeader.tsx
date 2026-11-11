@@ -5,7 +5,7 @@ import { ArrowUpRight, Clock3, Mail, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { links, navItems, site } from "@/config/site";
 import { Logo } from "../shared/Logo";
-import { Sun } from "../shared/Decor";
+
 import { useActiveSection, useScrolled } from "../shared/useActiveSection";
 
 const P = "m-";
@@ -42,7 +42,7 @@ export function MobileHeader({ logo }: { logo: string | null }) {
           scrolled || open ? "bg-cream/90 shadow-[0_8px_20px_-16px_rgba(36,68,56,0.4)] backdrop-blur-md" : "bg-cream"
         }`}
       >
-        <div className="mx-auto flex h-[68px] w-full max-w-[640px] items-center justify-between gap-3 px-4">
+        <div className="mx-auto flex h-[64px] w-full max-w-[480px] items-center justify-between gap-3 px-4">
           <a href={`#${P}home`} aria-label="Басты бетке өту" className="min-w-0 rounded-2xl" onClick={() => setOpen(false)}>
             <Logo src={logo} />
           </a>
@@ -53,7 +53,7 @@ export function MobileHeader({ logo }: { logo: string | null }) {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Мәзірді жабу" : "Мәзірді ашу"}
-            className={`relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl shadow-softer transition-colors ${
+            className={`relative grid h-12 w-12 shrink-0 place-items-center rounded-[16px] border-[1.5px] border-ink shadow-[3px_3px_0_0_#FFD76A] transition-colors ${
               open ? "bg-ink text-white" : "bg-leaf text-white"
             }`}
           >
@@ -76,7 +76,7 @@ export function MobileHeader({ logo }: { logo: string | null }) {
         {open && (
           <motion.div
             key="overlay"
-            className="fixed inset-x-0 bottom-0 top-[68px] z-40 bg-ink/30 backdrop-blur-[2px]"
+            className="fixed inset-x-0 bottom-0 top-[64px] z-40 bg-ink/30 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -91,17 +91,16 @@ export function MobileHeader({ logo }: { logo: string | null }) {
             role="dialog"
             aria-modal="true"
             aria-label="Мәзір"
-            className="fixed inset-x-0 top-[68px] z-50 max-h-[calc(100dvh-68px)] overflow-y-auto overflow-x-hidden rounded-b-[36px] bg-cream shadow-lift"
+            className="fixed inset-x-0 top-[64px] z-50 max-h-[calc(100dvh-64px)] overflow-y-auto overflow-x-hidden rounded-b-[32px] border-b-[1.5px] border-ink bg-cream"
             initial={{ clipPath: "inset(0 0 100% 0 round 0 0 36px 36px)" }}
             animate={{ clipPath: "inset(0 0 0% 0 round 0 0 36px 36px)" }}
             exit={{ clipPath: "inset(0 0 100% 0 round 0 0 36px 36px)" }}
             transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative mx-auto w-full max-w-[640px] px-4 pb-6 pt-2">
-              <Sun className="pointer-events-none absolute -right-6 -top-4 w-28 opacity-30" />
+            <div className="relative mx-auto w-full max-w-[480px] px-4 pb-6 pt-2">
               <nav aria-label="Мобильді мәзір">
                 <motion.ul
-                  className="relative flex flex-col gap-1.5"
+                  className="relative flex flex-col gap-2 pr-1"
                   initial="hidden"
                   animate="show"
                   variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04, delayChildren: 0.08 } } }}
@@ -117,12 +116,12 @@ export function MobileHeader({ logo }: { logo: string | null }) {
                           href={`#${P}${n.id}`}
                           onClick={() => setOpen(false)}
                           aria-current={isActive ? "true" : undefined}
-                          className={`flex min-h-[54px] items-center gap-3.5 rounded-[20px] px-4 text-[17px] font-extrabold transition-colors ${
-                            isActive ? "bg-leaf text-white" : "bg-white text-ink active:bg-leaf-50"
-                          }`}
+                          className={`flex min-h-[50px] items-center gap-3 border-[1.5px] border-ink px-3.5 font-display text-[15.5px] font-bold transition-colors ${
+                            i % 2 ? "rounded-[18px_18px_18px_6px]" : "rounded-[6px_18px_18px_18px]"
+                          } ${isActive ? "bg-leaf text-white shadow-[3px_3px_0_0_#244438]" : "bg-white text-ink shadow-[3px_3px_0_0_#FFD76A] active:bg-leaf-50"}`}
                         >
                           <span
-                            className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-[13px] font-black ${
+                            className={`grid h-7 w-7 shrink-0 place-items-center rounded-full font-hand text-[17px] font-bold ${
                               isActive ? "bg-white/20 text-white" : "bg-sun-100 text-ink"
                             }`}
                           >
@@ -136,8 +135,8 @@ export function MobileHeader({ logo }: { logo: string | null }) {
                 </motion.ul>
               </nav>
 
-              <div className="mt-4 grid gap-2.5 rounded-[24px] bg-leaf-50 p-4">
-                <p className="flex items-center gap-2.5 text-[15px] font-bold text-ink">
+              <div className="mt-4 grid gap-2.5 rounded-[20px] border-2 border-dashed border-ink/25 bg-leaf-50 p-3.5">
+                <p className="flex items-center gap-2.5 text-[14px] font-semibold text-ink">
                   <Clock3 className="h-5 w-5 shrink-0 text-leaf-700" aria-hidden="true" />
                   {site.schedule.days}, {site.schedule.hours}
                 </p>

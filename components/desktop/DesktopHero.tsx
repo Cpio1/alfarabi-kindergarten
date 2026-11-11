@@ -4,168 +4,157 @@ import { motion } from "motion/react";
 import { ArrowRight, MessageCircleHeart } from "lucide-react";
 import { site } from "@/config/site";
 import { heroFacts } from "@/config/content";
-import { Cloud, Drift, Flower, Float, Pencil, Sparkle, Star, Sun } from "../shared/Decor";
+import { Cloud, Daisy, DoodleArrow, Drift, Float, Heart, Rainbow, RoundBadge, Twinkle } from "../shared/Decor";
 import { Icon } from "../shared/Icon";
 import { Photo } from "../shared/Photo";
 import { Wave } from "../shared/Wave";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const factTones = ["bg-leaf-100", "bg-sun-100", "bg-rose-100", "bg-sky-100"];
 
 export function DesktopHero({ image }: { image: string | null }) {
   return (
-    <section id="home" aria-labelledby="hero-title" className="relative overflow-hidden bg-cream pb-16">
-      {/* мягкий фон */}
+    <section id="home" aria-labelledby="hero-title" className="relative overflow-hidden bg-cream pb-14">
+      {/* фон: клякса и точки */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-40 top-10 h-[420px] w-[420px] rounded-full bg-leaf-100/70 blur-3xl" />
-        <div className="absolute -right-24 -top-24 h-[380px] w-[380px] rounded-full bg-sun-100 blur-3xl" />
-        <div className="dots absolute bottom-16 left-[44%] h-40 w-56 opacity-70" />
+        <svg viewBox="0 0 600 600" className="absolute -right-24 -top-28 h-[640px] w-[640px] text-leaf-100">
+          <path d="M432 64c70 40 132 120 128 214s-74 168-150 214-166 54-238 10S40 380 50 290 132 116 210 72s152-48 222-8z" fill="currentColor" />
+        </svg>
+        <div className="dots absolute bottom-20 left-[40%] h-32 w-48 opacity-60" />
       </div>
-      <Drift className="absolute left-[3%] top-6 w-28 opacity-90" x={30} duration={16}>
-        <Cloud className="w-full drop-shadow-[0_8px_14px_rgba(36,68,56,0.08)]" />
-      </Drift>
-      <Drift className="absolute left-[38%] top-2 w-20 opacity-80" x={-24} duration={19} delay={2}>
+      <Drift className="absolute left-[2%] top-5 w-24" x={26} duration={16}>
         <Cloud className="w-full" />
       </Drift>
 
-      <div className="relative z-[2] mx-auto grid w-full max-w-[1240px] grid-cols-[1.06fr_1fr] items-center gap-10 px-8 pt-6 xl:gap-14 xl:pt-10">
+      <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] grid-cols-[1.1fr_1fr] items-center gap-10 px-8 pt-8 xl:gap-14 xl:pt-10">
         {/* Текст */}
         <div className="min-w-0">
-          <motion.span
-            initial={{ opacity: 0, y: 14 }}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[14px] font-extrabold text-leaf-700 shadow-softer ring-1 ring-leaf/15"
+            className="flex items-center gap-2"
           >
-            <Sparkle className="h-4 w-4" color="#FFC93C" />
-            Жеке бөбекжай-балабақша · {site.ageRange}
-          </motion.span>
+            <span className="rounded-full border-[1.5px] border-ink bg-white px-3.5 py-1 text-[13px] font-bold text-ink">
+              Жеке бөбекжай-балабақша
+            </span>
+            <span className="font-hand text-[26px] font-bold leading-none text-leaf-700">Қош келдіңіз!</span>
+          </motion.div>
 
           <motion.h1
             id="hero-title"
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.08, ease }}
-            className="mt-5 font-display text-[clamp(36px,3.5vw,50px)] font-black leading-[1.1] tracking-tight text-ink"
+            transition={{ duration: 0.6, delay: 0.06, ease }}
+            className="mt-5 font-display text-[clamp(32px,3.15vw,44px)] font-extrabold leading-[1.12] tracking-[-0.015em] text-ink"
           >
-            <span className="relative inline-block text-leaf">
-              «Аль-Фараби»
-              <svg aria-hidden="true" viewBox="0 0 300 18" className="absolute -bottom-2 left-0 h-3.5 w-full" preserveAspectRatio="none">
-                <path d="M4 12 C 80 2, 200 2, 296 10" stroke="#FFD76A" strokeWidth="8" fill="none" strokeLinecap="round" />
-              </svg>
+            <span className="relative inline-block">
+              <span aria-hidden="true" className="absolute -inset-x-2 bottom-[0.06em] top-[0.52em] -rotate-1 rounded-[10px] bg-sun" />
+              <span className="relative text-ink">«Аль-Фараби»</span>
             </span>
             <br />
-            <span className="whitespace-nowrap">бөбекжай-балабақшасы</span>
+            <span className="whitespace-nowrap text-leaf-700">бөбекжай-балабақшасы</span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.16, ease }}
-            className="mt-5 max-w-[540px] text-[18px] font-semibold leading-relaxed text-ink-soft xl:text-[19px]"
+            transition={{ duration: 0.55, delay: 0.14, ease }}
+            className="mt-4 max-w-[480px] text-[17px] font-medium leading-relaxed text-ink-soft"
           >
             {site.slogan}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.24, ease }}
-            className="mt-7 flex flex-wrap items-center gap-3"
+            transition={{ duration: 0.55, delay: 0.22, ease }}
+            className="relative mt-6 flex flex-wrap items-center gap-4"
           >
             <a
               href="#about"
-              className="group inline-flex h-[54px] items-center gap-2.5 rounded-full bg-leaf px-7 text-[16px] font-extrabold text-white shadow-[0_14px_28px_-12px_rgba(79,158,116,0.8)] transition hover:-translate-y-0.5 hover:bg-leaf-600"
+              className="sticker sticker-hover sticker-press group inline-flex h-[52px] items-center gap-2.5 rounded-full bg-leaf px-6 text-[15.5px] font-bold text-white"
+              style={{ ["--sc" as string]: "#244438" }}
             >
               Біз туралы
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
             <a
               href="#contact"
-              className="inline-flex h-[54px] items-center gap-2.5 rounded-full bg-white px-7 text-[16px] font-extrabold text-ink shadow-softer ring-2 ring-sun transition hover:-translate-y-0.5 hover:bg-sun-50"
+              className="sticker sticker-hover sticker-press inline-flex h-[52px] items-center gap-2.5 rounded-full bg-white px-6 text-[15.5px] font-bold text-ink"
+              style={{ ["--sc" as string]: "#FFD76A" }}
             >
-              <MessageCircleHeart className="h-5 w-5 text-leaf" aria-hidden="true" />
+              <MessageCircleHeart className="h-5 w-5 text-leaf-700" aria-hidden="true" />
               Байланысу
             </a>
+            <DoodleArrow className="hidden w-16 -rotate-12 xl:block" />
           </motion.div>
 
+          {/* Лента фактов */}
           <motion.ul
-            initial="hidden"
-            animate="show"
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.35 } } }}
-            className="mt-8 grid max-w-[600px] grid-cols-2 gap-3 xl:mt-9 xl:grid-cols-4"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.32, ease }}
+            className="sticker mt-7 grid max-w-[470px] grid-cols-2 rounded-[26px] bg-white p-1.5"
+            style={{ ["--sc" as string]: "#66B88C" }}
           >
             {heroFacts.map((f, i) => (
-              <motion.li
+              <li
                 key={f.label}
-                variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } } }}
-                whileHover={{ y: -4 }}
-                className={`flex items-center gap-3 bg-white px-3.5 py-3 xl:flex-col xl:items-start xl:gap-2 shadow-softer ring-1 ring-leaf/10 ${
-                  ["rounded-[26px_18px_26px_18px]", "rounded-[18px_26px_18px_26px]", "rounded-[26px_18px_26px_18px]", "rounded-[18px_26px_18px_26px]"][i]
+                className={`flex min-w-0 items-center gap-2.5 px-3 py-2 ${i % 2 === 1 ? "border-l-[1.5px] border-dashed border-ink/20" : ""} ${
+                  i > 1 ? "border-t-[1.5px] border-dashed border-ink/20" : ""
                 }`}
               >
-                <span
-                  className={`grid h-9 w-9 place-items-center rounded-xl ${
-                    ["bg-leaf text-white", "bg-sun text-ink", "bg-rose text-ink", "bg-sky text-white"][i]
-                  }`}
-                >
-                  <Icon name={f.icon} className="h-[18px] w-[18px]" />
+                <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${factTones[i]}`}>
+                  <Icon name={f.icon} className="h-[18px] w-[18px] text-ink" />
                 </span>
-                <span className="leading-tight">
-                  <span className="block whitespace-nowrap text-[15px] font-black text-ink">{f.label}</span>
-                  <span className="block text-[12.5px] font-semibold text-ink-soft">{f.caption}</span>
+                <span className="min-w-0 leading-tight">
+                  <span className="block whitespace-nowrap font-display text-[14px] font-bold text-ink">{f.label}</span>
+                  <span className="block truncate text-[12.5px] font-medium text-ink-soft">{f.caption}</span>
                 </span>
-              </motion.li>
+              </li>
             ))}
           </motion.ul>
         </div>
 
-        {/* Фото */}
+        {/* Фото в форме облака */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1, ease }}
-          className="relative mx-auto aspect-[1/0.92] w-full max-w-[540px]"
+          className="relative mx-auto w-full max-w-[500px]"
         >
-          <div aria-hidden="true" className="blob-b absolute inset-[-14px] rotate-6 bg-sun/60" />
-          <div aria-hidden="true" className="blob-c absolute inset-[-4px] -rotate-3 bg-leaf/25" />
           <Photo
             src={image}
             alt="«Аль-Фараби» балабақшасының ғимараты"
-            className="blob-a absolute inset-0 shadow-lift ring-[10px] ring-white"
-            sizes="(min-width: 1280px) 540px, 45vw"
+            shape="cloud"
+            className="aspect-[1.12/1] w-full"
+            sizes="(min-width: 1280px) 500px, 42vw"
+            backdrop="#FFD76A"
+            offset={12}
             priority
           />
-
-          <Float className="absolute -right-6 -top-10 w-28 xl:w-32" y={12} rotate={8} duration={7}>
-            <Sun className="w-full drop-shadow-[0_10px_18px_rgba(255,201,60,0.45)]" />
+          <Float className="absolute -top-6 left-[6%] w-28" y={8} rotate={-4} duration={7}>
+            <Rainbow className="w-full" />
           </Float>
-          <Float className="absolute -left-8 top-[18%] w-12" y={8} rotate={-14} duration={5} delay={0.6}>
-            <Star className="w-full" />
+          <Float className="absolute right-[2%] top-[8%] w-9" y={7} rotate={18} duration={5} delay={0.4}>
+            <Twinkle className="w-full" />
           </Float>
-          <Float className="absolute -bottom-3 -left-4 w-16" y={10} rotate={10} duration={6.5} delay={1}>
-            <Flower className="w-full" />
+          <Float className="absolute -right-3 bottom-[22%] w-12" y={9} rotate={10} duration={6.5} delay={0.8}>
+            <Daisy className="w-full" />
           </Float>
-          <Float className="absolute right-[6%] top-[46%] w-7" y={6} rotate={20} duration={4.5} delay={0.3}>
-            <Sparkle className="w-full" color="#FFFFFF" />
+          <Float className="absolute bottom-[4%] left-[38%] w-8" y={6} rotate={-10} duration={5.5} delay={1.1}>
+            <Heart className="w-full" />
           </Float>
-          <Float className="absolute -bottom-6 right-[12%] w-32" y={6} rotate={-6} duration={8} delay={0.4}>
-            <Pencil className="w-full -rotate-12 drop-shadow-[0_8px_12px_rgba(36,68,56,0.15)]" />
-          </Float>
-
-          {/* стикер */}
           <motion.div
-            initial={{ opacity: 0, y: 16, rotate: -8 }}
-            animate={{ opacity: 1, y: 0, rotate: -6 }}
-            transition={{ duration: 0.6, delay: 0.6, ease }}
-            className="absolute -left-6 bottom-[22%] flex items-center gap-2.5 rounded-[22px] bg-white px-4 py-3 shadow-soft"
+            initial={{ opacity: 0, scale: 0.6, rotate: -30 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 160, damping: 16, delay: 0.5 }}
+            className="absolute -left-5 bottom-[2%]"
           >
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-leaf-100 font-display text-[15px] font-black text-leaf-700">
-              Ә
-            </span>
-            <span className="leading-tight">
-              <span className="block text-[14px] font-black text-ink">Қазақ тілінде</span>
-              <span className="block text-[12px] font-semibold text-ink-soft">тәрбие мен білім</span>
-            </span>
+            <RoundBadge text="2–5 ЖАС ✦ ҚАЗАҚ ТІЛІНДЕ ✦ 4 МЕЗГІЛ АС ✦ " className="h-[118px] w-[118px]">
+              <span className="font-display text-[19px] font-extrabold text-leaf-700">2–5</span>
+            </RoundBadge>
           </motion.div>
         </motion.div>
       </div>

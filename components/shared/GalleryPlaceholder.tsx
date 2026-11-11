@@ -1,32 +1,29 @@
 import { Camera } from "lucide-react";
-import { Flower, Star, Sun } from "./Decor";
+import { Daisy, Star, Sun, Twinkle } from "./Decor";
 
 /** Заглушка, пока в public/images нет фотографий галереи. */
 export function GalleryPlaceholder({ text, compact = false }: { text: string; compact?: boolean }) {
-  const tiles = compact
-    ? ["bg-leaf-100 blob-a", "bg-sun-100 blob-b", "bg-rose-100 blob-c", "bg-sky-100 blob-d"]
-    : ["bg-leaf-100 pebble-a", "bg-sun-100 pebble-b", "bg-rose-100 pebble-c", "bg-sky-100 pebble-d"];
+  const tiles = [
+    { cls: "shape-arch bg-leaf-100", icon: <Sun className="w-1/3" /> },
+    { cls: "clip-scallop bg-sun-100", icon: <Daisy className="w-1/3" /> },
+    { cls: "shape-leaf bg-rose-100", icon: <Star className="w-1/4" color="#FFB4A8" /> },
+    { cls: "shape-drop-r bg-sky-100", icon: <Twinkle className="w-1/4" color="#8EC9EC" /> },
+  ];
   return (
     <div className="relative">
-      <div className={`grid ${compact ? "grid-cols-2 gap-3" : "grid-cols-4 gap-4"}`} aria-hidden="true">
+      <div className={`grid ${compact ? "grid-cols-2 gap-3" : "grid-cols-4 gap-5"}`} aria-hidden="true">
         {tiles.map((t, i) => (
-          <div key={i} className={`relative grid place-items-center ${compact ? "aspect-[5/4]" : "aspect-[5/4]"} ${t}`}>
-            {i % 3 === 0 ? (
-              <Sun className="h-1/3 w-1/3 opacity-70" />
-            ) : i % 3 === 1 ? (
-              <Flower className="h-1/4 w-1/4 opacity-70" />
-            ) : (
-              <Star className="h-1/4 w-1/4 opacity-70" />
-            )}
+          <div key={i} className={`grid ${compact ? "aspect-square" : "aspect-[5/4]"} place-items-center ${t.cls}`}>
+            {t.icon}
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 grid place-items-center p-4">
-        <div className="flex max-w-[340px] flex-col items-center gap-2 rounded-[28px] bg-white/95 px-6 py-5 text-center shadow-soft backdrop-blur">
-          <span className="grid h-12 w-12 place-items-center rounded-2xl bg-leaf text-white">
-            <Camera className="h-6 w-6" aria-hidden="true" />
+      <div className="absolute inset-0 grid place-items-center p-3">
+        <div className="sticker flex max-w-[320px] items-center gap-3 rounded-[22px] bg-white px-5 py-4" style={{ ["--sc" as string]: "#66B88C" }}>
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-sun">
+            <Camera className="h-5 w-5 text-ink" aria-hidden="true" />
           </span>
-          <p className="font-display text-[17px] font-extrabold text-ink">{text}</p>
+          <p className="font-display text-[15px] font-bold leading-snug text-ink">{text}</p>
         </div>
       </div>
     </div>

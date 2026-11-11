@@ -2,45 +2,44 @@
 
 import { motion } from "motion/react";
 import { clubs } from "@/config/content";
-import { Float, Pencil } from "../shared/Decor";
 import { Icon } from "../shared/Icon";
 import { Stagger, staggerChild } from "../shared/Reveal";
 import { SectionHeading } from "../shared/SectionHeading";
 import { tones } from "../shared/tones";
 import { Wave } from "../shared/Wave";
 
-const iconShapes = ["blob-a", "blob-b", "blob-c"];
+const windows = ["shape-arch", "clip-scallop", "clip-cloud"];
+const cards = ["rounded-[24px_24px_24px_8px]", "rounded-[24px]", "rounded-[24px_24px_8px_24px]"];
 
 export function MobileClubs() {
   return (
-    <section id="m-clubs" aria-labelledby="m-clubs-title" className="relative overflow-hidden bg-cream pb-16 pt-6">
-      <Float className="absolute -right-4 top-6 w-24 opacity-90" y={6} rotate={-4} duration={7}>
-        <Pencil className="w-full -rotate-12" />
-      </Float>
-      <div className="relative z-[2] mx-auto w-full max-w-[640px] px-4">
-        <SectionHeading eyebrow={clubs.eyebrow} title={clubs.title} text={clubs.text} size="mobile" id="m-clubs-title" />
+    <section id="m-clubs" aria-labelledby="m-clubs-title" className="relative overflow-hidden bg-cream pb-12 pt-5">
+      <div className="relative z-[2] mx-auto w-full max-w-[480px] px-4">
+        <SectionHeading eyebrow={clubs.eyebrow} title={clubs.title} text={clubs.text} size="mobile" id="m-clubs-title" mark="#B9A8EC" />
 
-        <Stagger className="mt-6 grid gap-3">
+        <Stagger className="mt-5 grid gap-3.5 pr-1">
           {clubs.items.map((c, i) => {
             const t = tones[c.tone];
             return (
               <motion.article
                 key={c.title}
                 variants={staggerChild}
-                whileTap={{ scale: 0.98 }}
-                className={`relative overflow-hidden rounded-[28px] bg-white p-4 shadow-softer ring-1 ${t.ring}`}
+                className={`sticker sticker-sm relative overflow-hidden bg-white p-3.5 ${cards[i]}`}
+                style={{ ["--sc" as string]: t.hex }}
               >
-                <div aria-hidden="true" className={`absolute -right-8 -top-8 h-28 w-28 rounded-full ${t.bg}`} />
-                <div className="relative flex items-center gap-3.5">
-                  <span className={`grid h-[60px] w-[60px] shrink-0 place-items-center ${iconShapes[i]} ${t.icon}`}>
-                    <Icon name={c.icon} className="h-7 w-7" strokeWidth={2} />
-                  </span>
-                  <span className="min-w-0">
-                    <h3 className="font-display text-[19px] font-black text-ink">{c.title}</h3>
-                    <p className="text-[14px] font-extrabold text-leaf-700">{c.subtitle}</p>
-                  </span>
+                <div className="flex items-center gap-3">
+                  <div className="relative h-[54px] w-[58px] shrink-0">
+                    <div aria-hidden="true" className={`absolute inset-0 bg-ink ${windows[i]}`} />
+                    <div className={`absolute inset-[2px] grid place-items-center ${t.bg} ${windows[i]}`}>
+                      <Icon name={c.icon} className="h-6 w-6 text-ink" strokeWidth={1.9} />
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-[16.5px] font-bold text-ink">{c.title}</h3>
+                    <p className="font-hand text-[18px] font-bold leading-tight text-leaf-700">{c.subtitle}</p>
+                  </div>
                 </div>
-                <p className="relative mt-3 text-[14.5px] leading-relaxed text-ink-soft">{c.text}</p>
+                <p className="mt-2.5 text-[13.5px] leading-relaxed text-ink-soft">{c.text}</p>
               </motion.article>
             );
           })}

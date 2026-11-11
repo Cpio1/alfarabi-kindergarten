@@ -4,12 +4,13 @@
 @custom-variant dark (&:where(.__never-dark, .__never-dark *));
 
 @theme {
-  --font-sans: var(--font-nunito), ui-rounded, system-ui, sans-serif;
-  --font-display: var(--font-nunito), ui-rounded, sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-alt), var(--font-manrope), sans-serif;
+  --font-hand: var(--font-caveat), cursive;
 
   --color-leaf: #66b88c;
   --color-leaf-600: #4f9e74;
-  --color-leaf-700: #3f8560;
+  --color-leaf-700: #3a7d59;
   --color-leaf-100: #dcf0e4;
   --color-leaf-50: #eef8f2;
   --color-sun: #ffd76a;
@@ -17,22 +18,21 @@
   --color-sun-50: #fff8e1;
   --color-cream: #fff9ed;
   --color-ink: #244438;
-  --color-ink-soft: #4d6a5e;
+  --color-ink-soft: #52695f;
   --color-rose: #ffb4a8;
   --color-rose-100: #ffe3dc;
   --color-sky: #8ec9ec;
-  --color-sky-100: #dcefFa;
+  --color-sky-100: #dcf0fb;
   --color-lilac: #b9a8ec;
-  --color-lilac-100: #ebe5fb;
+  --color-lilac-100: #ece6fc;
 
-  --shadow-soft: 0 10px 30px -12px rgb(36 68 56 / 0.18);
-  --shadow-softer: 0 6px 18px -10px rgb(36 68 56 / 0.16);
-  --shadow-lift: 0 22px 44px -18px rgb(36 68 56 / 0.28);
+  --shadow-soft: 0 12px 30px -14px rgb(36 68 56 / 0.22);
+  --shadow-softer: 0 6px 16px -10px rgb(36 68 56 / 0.2);
 }
 
 :root {
   color-scheme: light only;
-  --header-h: 76px;
+  --header-h: 68px;
 }
 
 html {
@@ -52,26 +52,17 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
 
-section[id] {
-  scroll-margin-top: calc(var(--header-h) + 8px);
-}
+section[id] { scroll-margin-top: calc(var(--header-h) + 4px); }
 
-::selection {
-  background: var(--color-sun);
-  color: var(--color-ink);
-}
+::selection { background: var(--color-sun); color: var(--color-ink); }
 
 :focus-visible {
   outline: 3px solid var(--color-leaf);
@@ -79,28 +70,50 @@ section[id] {
   border-radius: 12px;
 }
 
-/* ───── Органические формы ───── */
-.blob-a { border-radius: 62% 38% 46% 54% / 52% 44% 56% 48%; }
-.blob-b { border-radius: 42% 58% 61% 39% / 45% 55% 45% 55%; }
-.blob-c { border-radius: 30% 70% 52% 48% / 46% 38% 62% 54%; }
-.blob-d { border-radius: 56% 44% 38% 62% / 60% 52% 48% 40%; }
-.pebble-a { border-radius: 24px 36px 24px 36px; }
-.pebble-b { border-radius: 36px 24px 36px 24px; }
-.pebble-c { border-radius: 30px 30px 40px 22px; }
-.pebble-d { border-radius: 22px 40px 30px 30px; }
+/* ───── «Стикер»: тонкий контур + цветная смещённая тень ───── */
+.sticker {
+  --sc: var(--color-sun);
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 5px 5px 0 0 var(--sc);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sticker.sticker-sm { box-shadow: 3px 3px 0 0 var(--sc); }
+@media (hover: hover) {
+  .sticker-hover:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 8px 9px 0 0 var(--sc);
+  }
+}
+.sticker-press:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 var(--sc); }
 
-.arch { border-radius: 999px 999px 48px 48px; }
-.arch-sm { border-radius: 999px 999px 28px 28px; }
+/* ───── Асимметричные формы ───── */
+.shape-leaf { border-radius: 44px 10px 44px 10px; }
+.shape-leaf-r { border-radius: 10px 44px 10px 44px; }
+.shape-arch { border-radius: 999px 999px 26px 26px; }
+.shape-bean { border-radius: 60% 40% 48% 52% / 46% 54% 46% 54%; }
+.shape-drop { border-radius: 50% 50% 50% 14%; }
+.shape-drop-r { border-radius: 50% 50% 14% 50%; }
+.shape-tag { border-radius: 30px 30px 30px 6px; }
+.shape-tag-r { border-radius: 30px 30px 6px 30px; }
 
-/* мягкая точечная текстура */
+/* фигурные клип-маски из <ShapeDefs/> */
+.clip-cloud { clip-path: url(#clip-cloud); }
+.clip-scallop { clip-path: url(#clip-scallop); }
+.clip-wave { clip-path: url(#clip-wave); }
+.clip-blob { clip-path: url(#clip-blob); }
+.clip-flower { clip-path: url(#clip-flower); }
+
+/* фоновые узоры */
 .dots {
-  background-image: radial-gradient(rgb(102 184 140 / 0.22) 1.4px, transparent 1.6px);
-  background-size: 22px 22px;
+  background-image: radial-gradient(rgb(36 68 56 / 0.14) 1.3px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+.grid-paper {
+  background-image:
+    linear-gradient(rgb(102 184 140 / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(102 184 140 / 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 .text-balance { text-wrap: balance; }
 .text-pretty { text-wrap: pretty; }
-
-/* горизонтальная лента без видимого скроллбара */
-.no-scrollbar { scrollbar-width: none; }
-.no-scrollbar::-webkit-scrollbar { display: none; }

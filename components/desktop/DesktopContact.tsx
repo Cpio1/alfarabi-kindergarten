@@ -1,54 +1,55 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ExternalLink, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { links, site } from "@/config/site";
 import { contact } from "@/config/content";
 import { getContactItems, getSocialButtons } from "../shared/contactItems";
-import { Float, Flower, Star } from "../shared/Decor";
+import { Cloud, Drift, Float, Sun, Twinkle } from "../shared/Decor";
 import { MapArt } from "../shared/MapArt";
 import { Reveal, Stagger, staggerChild } from "../shared/Reveal";
 import { SectionHeading } from "../shared/SectionHeading";
+
+const rowShapes = ["rounded-[22px_22px_22px_6px]", "rounded-[22px]", "rounded-[22px]", "rounded-[22px_6px_22px_22px]", "rounded-[22px]"];
 
 export function DesktopContact() {
   const items = getContactItems();
   const socials = getSocialButtons();
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-cream pb-20 pt-14">
-      <Float className="absolute left-[3%] top-24 w-12" y={8} rotate={12} duration={6}>
-        <Star className="w-full" />
-      </Float>
-      <Float className="absolute bottom-16 right-[3%] w-14" y={10} rotate={-10} duration={7}>
-        <Flower className="w-full" />
-      </Float>
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-cream pb-16 pt-10">
+      <Drift className="absolute right-[6%] top-6 w-24" x={-22} duration={17}>
+        <Cloud className="w-full" />
+      </Drift>
 
-      <div className="relative z-[2] mx-auto w-full max-w-[1240px] px-8">
-        <SectionHeading eyebrow={contact.eyebrow} title={contact.title} text={contact.text} id="contact-title" />
+      <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] grid-cols-[1fr_1fr] items-center gap-12 px-8">
+        <div className="min-w-0">
+          <SectionHeading eyebrow={contact.eyebrow} title={contact.title} text={contact.text} align="left" id="contact-title" mark="#66B88C" />
 
-        <div className="mt-10 grid grid-cols-[1.05fr_1fr] gap-8">
-          <Stagger className="flex flex-col gap-3.5">
-            {items.map((it) => {
+          <Stagger className="mt-6 grid gap-3">
+            {items.map((it, i) => {
               const inner = (
                 <>
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${it.tone}`}>{it.icon}</span>
+                  <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border-[1.5px] border-ink ${it.tone}`}>{it.icon}</span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[13px] font-extrabold uppercase tracking-[0.06em] text-ink-soft">{it.label}</span>
-                    <span className="mt-0.5 block break-words text-[16.5px] font-bold leading-snug text-ink">{it.value}</span>
+                    <span className="block font-hand text-[18px] font-bold leading-none text-leaf-700">{it.label}</span>
+                    <span className="mt-1 block break-words text-[15px] font-semibold leading-snug text-ink">{it.value}</span>
                   </span>
-                  {it.href && <ExternalLink className="h-5 w-5 shrink-0 text-ink-soft transition group-hover:text-leaf" aria-hidden="true" />}
+                  {it.href && <ArrowUpRight className="h-5 w-5 shrink-0 text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />}
                 </>
               );
-              const cls =
-                "group flex items-center gap-4 rounded-[26px] bg-white p-4 pr-5 shadow-softer ring-1 ring-leaf/10 transition hover:-translate-y-0.5 hover:shadow-soft";
+              const cls = `sticker sticker-sm group flex items-center gap-3.5 bg-white px-4 py-3 ${rowShapes[i] ?? "rounded-[22px]"} ${it.href ? "sticker-hover" : ""}`;
+              const style = { ["--sc" as string]: ["#66B88C", "#FFB4A8", "#8EC9EC", "#FFD76A", "#B9A8EC"][i % 5] };
               return (
                 <motion.div key={it.key} variants={staggerChild}>
                   {it.href ? (
-                    <a href={it.href} className={cls} {...(it.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                    <a href={it.href} className={cls} style={style} {...(it.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                       {inner}
                     </a>
                   ) : (
-                    <div className={cls}>{inner}</div>
+                    <div className={cls} style={style}>
+                      {inner}
+                    </div>
                   )}
                 </motion.div>
               );
@@ -61,7 +62,8 @@ export function DesktopContact() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex h-[52px] items-center gap-2.5 rounded-full px-6 text-[15.5px] font-extrabold shadow-softer transition hover:-translate-y-0.5 ${s.className}`}
+                    className={`sticker sticker-hover inline-flex h-[50px] items-center gap-2.5 rounded-full px-5 text-[15px] font-bold ${s.className}`}
+                    style={{ ["--sc" as string]: "#244438" }}
                   >
                     {s.icon}
                     {s.label}
@@ -70,30 +72,43 @@ export function DesktopContact() {
               </motion.div>
             )}
           </Stagger>
+        </div>
 
-          <Reveal delay={0.1} className="relative">
-            <div className="flex h-full flex-col overflow-hidden rounded-[40px] bg-white shadow-soft ring-1 ring-leaf/10">
-              <MapArt className="min-h-[240px] flex-1" />
-              <div className="flex items-center gap-4 p-6">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-rose-100 text-ink">
-                  <MapPin className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <p className="min-w-0 flex-1 text-[15px] font-semibold leading-snug text-ink">{site.address.full}</p>
-              </div>
-              <div className="px-6 pb-6">
-                <a
-                  href={links.twoGis}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-[54px] w-full items-center justify-center gap-2.5 rounded-full bg-leaf text-[16px] font-extrabold text-white shadow-[0_14px_28px_-12px_rgba(79,158,116,0.8)] transition hover:-translate-y-0.5 hover:bg-leaf-600"
-                >
-                  {contact.map}
-                  <ExternalLink className="h-5 w-5" aria-hidden="true" />
-                </a>
+        {/* Открытка с картой */}
+        <Reveal delay={0.1} className="relative mx-auto w-full max-w-[500px]">
+          <div className="sticker relative rotate-[1.5deg] rounded-[30px] bg-white p-3.5" style={{ ["--sc" as string]: "#66B88C" }}>
+            <div className="relative overflow-hidden rounded-[22px] border-[1.5px] border-ink">
+              <MapArt className="h-[230px]" />
+            </div>
+            <div className="flex items-start gap-3 px-1.5 pb-1 pt-4">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-[1.5px] border-ink bg-rose-100">
+                <MapPin className="h-5 w-5 text-ink" aria-hidden="true" />
+              </span>
+              <p className="min-w-0 flex-1 text-[14px] font-semibold leading-snug text-ink">{site.address.full}</p>
+            </div>
+            <a
+              href={links.twoGis}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sticker sticker-hover sticker-press mt-3 flex h-[50px] w-full items-center justify-center gap-2 rounded-full bg-leaf text-[15px] font-bold text-white"
+              style={{ ["--sc" as string]: "#244438" }}
+            >
+              {contact.map}
+              <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+            </a>
+            {/* «марка» */}
+            <div className="absolute -right-5 -top-6 rotate-12">
+              <div className="clip-scallop grid h-[78px] w-[78px] place-items-center bg-ink">
+                <div className="clip-scallop grid h-[74px] w-[74px] place-items-center bg-sun-100">
+                  <Sun className="w-12" />
+                </div>
               </div>
             </div>
-          </Reveal>
-        </div>
+          </div>
+          <Float className="absolute -bottom-5 -left-4 w-9" y={7} rotate={16} duration={5.5}>
+            <Twinkle className="w-full" color="#FFB4A8" />
+          </Float>
+        </Reveal>
       </div>
     </section>
   );

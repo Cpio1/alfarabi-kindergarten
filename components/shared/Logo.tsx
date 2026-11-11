@@ -1,28 +1,32 @@
 import Image from "next/image";
 import { site } from "@/config/site";
 
-/** Логотип: реальный logo.* из public/images или фирменный значок-солнце. */
-export function Logo({ src, compact = false }: { src: string | null; compact?: boolean }) {
+/** Логотип: реальный logo.* из public/images или фирменный значок-печать с солнцем. */
+export function Logo({ src, light = false }: { src: string | null; light?: boolean }) {
   return (
     <span className="flex min-w-0 items-center gap-2.5">
-      <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-[16px] bg-white shadow-softer ring-1 ring-leaf/15">
+      <span className="relative grid h-11 w-11 shrink-0 place-items-center">
         {src ? (
-          <Image src={src} alt="" fill sizes="44px" className="object-contain p-1" />
+          <span className="relative h-11 w-11 overflow-hidden rounded-full border-[1.5px] border-ink bg-white">
+            <Image src={src} alt="" fill sizes="44px" className="object-contain p-1" />
+          </span>
         ) : (
-          <svg viewBox="0 0 44 44" className="h-9 w-9" aria-hidden="true">
-            <circle cx="22" cy="22" r="13" fill="#FFD76A" />
-            <g stroke="#FFC93C" strokeWidth="3" strokeLinecap="round">
-              <path d="M22 3v4M22 37v4M3 22h4M37 22h4M8.6 8.6l2.8 2.8M32.6 32.6l2.8 2.8M8.6 35.4l2.8-2.8M32.6 11.4l2.8-2.8" />
-            </g>
-            <path d="M16.5 28 L22 14.5 L27.5 28 M18.6 23.4 h6.8" stroke="#244438" strokeWidth="2.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          <svg viewBox="0 0 48 48" className="h-11 w-11" aria-hidden="true">
+            <path
+              d="M24 2 l4.2 3.3 5.2-1 2.2 4.9 5.1 1.6-.4 5.3 3.7 3.8-2.4 4.8 2.4 4.8-3.7 3.8.4 5.3-5.1 1.6-2.2 4.9-5.2-1L24 46l-4.2-3.3-5.2 1-2.2-4.9-5.1-1.6.4-5.3-3.7-3.8 2.4-4.8-2.4-4.8 3.7-3.8-.4-5.3 5.1-1.6 2.2-4.9 5.2 1z"
+              fill="#66B88C"
+              stroke="#244438"
+              strokeWidth="1.6"
+              strokeLinejoin="round"
+            />
+            <circle cx="24" cy="24" r="12.5" fill="#FFD76A" stroke="#244438" strokeWidth="1.6" />
+            <path d="M19 29.5 L24 17.5 L29 29.5 M20.8 25.4 h6.4" stroke="#244438" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         )}
       </span>
       <span className="flex min-w-0 flex-col leading-none">
-        <span className="truncate font-display text-[19px] font-black tracking-tight text-ink">{site.shortName}</span>
-        {!compact && (
-          <span className="mt-1 truncate text-[11.5px] font-bold text-leaf-700">бөбекжай-балабақшасы</span>
-        )}
+        <span className={`truncate font-display text-[18px] font-bold ${light ? "text-white" : "text-ink"}`}>{site.shortName}</span>
+        <span className={`mt-1 truncate font-hand text-[16px] font-bold ${light ? "text-sun" : "text-leaf-700"}`}>бөбекжай-балабақша</span>
       </span>
     </span>
   );

@@ -17,12 +17,12 @@ export function DesktopHeader({ logo }: { logo: string | null }) {
         scrolled ? "bg-cream/85 shadow-[0_8px_24px_-18px_rgba(36,68,56,0.35)] backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-[76px] w-full max-w-[1240px] items-center justify-between gap-6 px-8">
+      <div className="mx-auto flex h-[68px] w-full max-w-[1200px] items-center justify-between gap-6 px-8">
         <a href="#home" aria-label="Басты бетке өту" className="rounded-2xl">
           <Logo src={logo} />
         </a>
         <nav aria-label="Негізгі мәзір">
-          <ul className="flex items-center gap-1 rounded-full bg-white/80 p-1.5 shadow-softer ring-1 ring-leaf/10">
+          <ul className="flex items-center gap-0.5 rounded-full border-[1.5px] border-ink bg-white p-1 shadow-[3px_3px_0_0_#FFD76A]">
             {navItems.map((item) => {
               const isActive = active === item.id;
               const isContact = item.id === "contact";
@@ -31,9 +31,9 @@ export function DesktopHeader({ logo }: { logo: string | null }) {
                   <a
                     href={`#${item.id}`}
                     aria-current={isActive ? "true" : undefined}
-                    className={`relative block whitespace-nowrap rounded-full px-3 py-2 text-[14px] font-bold transition-colors xl:px-3.5 ${
+                    className={`relative block whitespace-nowrap rounded-full px-3 py-1.5 text-[14px] font-semibold transition-colors xl:px-3.5 ${
                       isContact
-                        ? "bg-sun text-ink hover:bg-[#ffcd45]"
+                        ? "bg-sun font-bold text-ink hover:bg-[#ffcd45]"
                         : isActive
                           ? "text-white"
                           : "text-ink/80 hover:bg-leaf-50 hover:text-ink"

@@ -1,13 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito } from "next/font/google";
+import { Caveat, Manrope, Montserrat_Alternates } from "next/font/google";
 import { site } from "@/config/site";
 import { MotionProvider } from "@/components/shared/MotionProvider";
+import { ShapeDefs } from "@/components/shared/ShapeDefs";
 import "./globals.css";
 
-const nunito = Nunito({
+/* Заголовки — выразительный Montserrat Alternates, текст — чистый Manrope, акценты — рукописный Caveat.
+   Все три шрифта содержат cyrillic-ext (ә, ғ, қ, ң, ө, ұ, ү, һ, і). */
+const display = Montserrat_Alternates({
   subsets: ["latin", "cyrillic", "cyrillic-ext"],
-  weight: ["400", "600", "700", "800", "900"],
-  variable: "--font-nunito",
+  weight: ["600", "700", "800"],
+  variable: "--font-alt",
+  display: "swap",
+});
+const body = Manrope({
+  subsets: ["latin", "cyrillic", "cyrillic-ext"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+const hand = Caveat({
+  subsets: ["latin", "cyrillic", "cyrillic-ext"],
+  weight: ["600", "700"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -73,7 +88,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="kk" className={`${nunito.variable}`} style={{ colorScheme: "light" }} suppressHydrationWarning>
+    <html lang="kk" className={`${display.variable} ${body.variable} ${hand.variable}`} style={{ colorScheme: "light" }} suppressHydrationWarning>
       <body className="min-h-dvh bg-cream font-sans text-ink">
         <a
           href="#main-start"
@@ -81,6 +96,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Негізгі мазмұнға өту
         </a>
+        <ShapeDefs />
         <MotionProvider>{children}</MotionProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
