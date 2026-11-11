@@ -18,7 +18,7 @@ export function DesktopClubs() {
     <section id="clubs" aria-labelledby="clubs-title" className="relative overflow-hidden bg-cream pb-20 pt-10">
       <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] grid-cols-[300px_1fr] items-center gap-10 px-8 xl:grid-cols-[330px_1fr] xl:gap-12">
         <div className="relative">
-          <SectionHeading eyebrow={clubs.eyebrow} title={clubs.title} text={clubs.text} align="left" id="clubs-title" mark="#B9A8EC" />
+          <SectionHeading eyebrow={clubs.eyebrow} title={clubs.title} align="left" id="clubs-title" mark="#B9A8EC" />
           <Reveal delay={0.1} className="mt-6">
             <Float y={6} rotate={-3} duration={7}>
               <Pencil className="w-40 -rotate-6" />

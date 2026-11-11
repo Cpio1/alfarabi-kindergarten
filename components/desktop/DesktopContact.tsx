@@ -24,7 +24,7 @@ export function DesktopContact() {
 
       <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] grid-cols-[1fr_1fr] items-center gap-12 px-8">
         <div className="min-w-0">
-          <SectionHeading eyebrow={contact.eyebrow} title={contact.title} text={contact.text} align="left" id="contact-title" mark="#66B88C" />
+          <SectionHeading eyebrow={contact.eyebrow} title={contact.title} align="left" id="contact-title" mark="#66B88C" />
 
           <Stagger className="mt-6 grid gap-3">
             {items.map((it, i) => {

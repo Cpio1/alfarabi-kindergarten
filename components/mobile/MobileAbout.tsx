@@ -42,7 +42,6 @@ export function MobileAbout({ image }: { image: string | null }) {
 
         <Reveal className="mt-5">
           <p className="text-[15px] font-semibold leading-relaxed text-ink">{about.lead}</p>
-          <p className="mt-2 text-[14px] leading-relaxed text-ink-soft">{about.text}</p>
         </Reveal>
 
         {/* ценности: компактная сетка 2×2 */}

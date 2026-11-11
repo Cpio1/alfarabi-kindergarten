@@ -18,7 +18,7 @@ export function MobileContact() {
   return (
     <section id="m-contact" aria-labelledby="m-contact-title" className="relative overflow-hidden bg-cream pb-10 pt-5">
       <div className="relative z-[2] mx-auto w-full max-w-[480px] px-4">
-        <SectionHeading eyebrow={contact.eyebrow} title={contact.title} text={contact.text} size="mobile" id="m-contact-title" mark="#66B88C" />
+        <SectionHeading eyebrow={contact.eyebrow} title={contact.title} size="mobile" id="m-contact-title" mark="#66B88C" />
 
         <Stagger className="mt-5 grid gap-2.5 pr-1">
           {items.map((it, i) => {

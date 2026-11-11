@@ -15,7 +15,7 @@ export function MobileClubs() {
   return (
     <section id="m-clubs" aria-labelledby="m-clubs-title" className="relative overflow-hidden bg-cream pb-12 pt-5">
       <div className="relative z-[2] mx-auto w-full max-w-[480px] px-4">
-        <SectionHeading eyebrow={clubs.eyebrow} title={clubs.title} text={clubs.text} size="mobile" id="m-clubs-title" mark="#B9A8EC" />
+        <SectionHeading eyebrow={clubs.eyebrow} title={clubs.title} size="mobile" id="m-clubs-title" mark="#B9A8EC" />
 
         <Stagger className="mt-5 grid gap-3.5 pr-1">
           {clubs.items.map((c, i) => {

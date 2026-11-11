@@ -37,7 +37,7 @@ export function DesktopGallery({ images }: { images: string[] }) {
       </Float>
 
       <div className="relative z-[2] mx-auto w-full max-w-[1100px] px-8">
-        <SectionHeading eyebrow={gallery.eyebrow} title={gallery.title} text={gallery.text} id="gallery-title" mark="#8EC9EC" />
+        <SectionHeading eyebrow={gallery.eyebrow} title={gallery.title} id="gallery-title" mark="#8EC9EC" />
 
         <div className="mt-6">
           {images.length === 0 ? (

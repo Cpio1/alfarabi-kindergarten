@@ -21,7 +21,7 @@ export function MobileGallery({ images }: { images: string[] }) {
   return (
     <section id="m-gallery" aria-labelledby="m-gallery-title" className="relative overflow-hidden bg-white pb-12 pt-5">
       <div className="relative z-[2] mx-auto w-full max-w-[480px] px-4">
-        <SectionHeading eyebrow={gallery.eyebrow} title={gallery.title} text={gallery.text} size="mobile" id="m-gallery-title" mark="#8EC9EC" />
+        <SectionHeading eyebrow={gallery.eyebrow} title={gallery.title} size="mobile" id="m-gallery-title" mark="#8EC9EC" />
 
         <div className="mt-5">
           {images.length === 0 ? (

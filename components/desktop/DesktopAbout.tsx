@@ -72,7 +72,6 @@ export function DesktopAbout({ image }: { image: string | null }) {
           <SectionHeading eyebrow={about.eyebrow} title={about.title} align="left" id="about-title" />
           <Reveal delay={0.06}>
             <p className="mt-3 text-[16px] font-semibold leading-relaxed text-ink">{about.lead}</p>
-            <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{about.text}</p>
           </Reveal>
 
           <Stagger className="mt-6 grid grid-cols-2 gap-4">
