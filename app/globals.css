@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* Только светлая тема: dark-вариант привязан к несуществующему классу и никогда не активен */
+@custom-variant dark (&:where(.__never-dark, .__never-dark *));
+
+@theme {
+  --font-sans: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+  --font-display: var(--font-nunito), ui-rounded, sans-serif;
+
+  --color-leaf: #66b88c;
+  --color-leaf-600: #4f9e74;
+  --color-leaf-700: #3f8560;
+  --color-leaf-100: #dcf0e4;
+  --color-leaf-50: #eef8f2;
+  --color-sun: #ffd76a;
+  --color-sun-100: #fff1c7;
+  --color-sun-50: #fff8e1;
+  --color-cream: #fff9ed;
+  --color-ink: #244438;
+  --color-ink-soft: #4d6a5e;
+  --color-rose: #ffb4a8;
+  --color-rose-100: #ffe3dc;
+  --color-sky: #8ec9ec;
+  --color-sky-100: #dcefFa;
+  --color-lilac: #b9a8ec;
+  --color-lilac-100: #ebe5fb;
+
+  --shadow-soft: 0 10px 30px -12px rgb(36 68 56 / 0.18);
+  --shadow-softer: 0 6px 18px -10px rgb(36 68 56 / 0.16);
+  --shadow-lift: 0 22px 44px -18px rgb(36 68 56 / 0.28);
+}
+
+:root {
+  color-scheme: light only;
+  --header-h: 76px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--header-h) + 8px);
+}
+
+::selection {
+  background: var(--color-sun);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-leaf);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* ───── Органические формы ───── */
+.blob-a { border-radius: 62% 38% 46% 54% / 52% 44% 56% 48%; }
+.blob-b { border-radius: 42% 58% 61% 39% / 45% 55% 45% 55%; }
+.blob-c { border-radius: 30% 70% 52% 48% / 46% 38% 62% 54%; }
+.blob-d { border-radius: 56% 44% 38% 62% / 60% 52% 48% 40%; }
+.pebble-a { border-radius: 24px 36px 24px 36px; }
+.pebble-b { border-radius: 36px 24px 36px 24px; }
+.pebble-c { border-radius: 30px 30px 40px 22px; }
+.pebble-d { border-radius: 22px 40px 30px 30px; }
+
+.arch { border-radius: 999px 999px 48px 48px; }
+.arch-sm { border-radius: 999px 999px 28px 28px; }
+
+/* мягкая точечная текстура */
+.dots {
+  background-image: radial-gradient(rgb(102 184 140 / 0.22) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* горизонтальная лента без видимого скроллбара */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
